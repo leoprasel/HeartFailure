@@ -1,5 +1,19 @@
+# Machine Learning
+---
 # [Projeto 1: HeartFailure](https://github.com/leoprasel/Portfolio/blob/main/HeartFailure.ipynb)
 ## Resumo:
-* Projeto de análise de dados e machine learning utilizando banco de dados do Kaggle, com dados sobre pacientes que tiveram ataques cardíacos e suas características físicas 
+* Data analysis project using machine learning algorithms on a Kaggle database. The database shows data from heart attack patients and their respective physical conditions.
 
 ## [Jupyter Notebook](https://github.com/leoprasel/Portfolio/blob/main/HeartFailure.ipynb)
+
+---
+# Data Engineering
+---
+# [SQL Learning and Training](https://github.com/leoprasel/Portfolio/blob/main/SQL.md)
+## Resumo: 
+* Stanford University's StanfordOnline course "Databases: Relational Databases and SQL
+
+
+
+
+
