@@ -27,4 +27,35 @@ So now we should structure the SQL database.
   );
 ```
 
+```
+from requests import Request, Session
+from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
+import json
+url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
+parameters = {
+  'start':'1',
+  'limit':'2',
+  'convert':'USD'
+}
+headers = {
+  'Accepts': 'application/json',
+  'X-CMC_PRO_API_KEY': 'be9348e4-68dc-4a62-8b27-91e7698bd09a',
+}
 
+session = Session()
+session.headers.update(headers)
+
+
+response = session.get(url, params=parameters)
+coins = json.loads(response.text)
+#print(json.dumps(data, indent=4, sort_keys=True))
+
+import mysql.connector
+def insertTable():
+    try:
+        connection = mysql.connector.connect(host='localhost')
+
+
+for coin in coins['data']:
+    record = (coin['name'],coin['symbol'],coin['quote']['USD']['price'],coin['quote']['USD']['market_cap'],coin['last_updated'])
+```
