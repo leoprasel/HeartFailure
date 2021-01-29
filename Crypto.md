@@ -1,4 +1,6 @@
 ### In this project we will be using Docker, MySQL and python for API handling
+#### We'll extract data from CoinMarketCap, a cryptocurrency website that shows the current price of all the different coins.
+#### After extracting it using it's API with python, we'll store the data in a MySQL database with the help of Docker. 
 
 #### Docker
 In order to create a mysql docker container, we use the following code on the linux command line:
