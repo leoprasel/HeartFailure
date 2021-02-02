@@ -89,15 +89,16 @@ for coin in coins['data']:
 
 print(cursor.rowcount, 'records inserted.')
 ```
-
+Testing our results...\
+\
 mysql> SELECT * FROM crypto;\
 +---------+----------+--------+--------------------+--------------------+--------------------------+\
-| rank_id | name     | symbol | price              | marketcap          | datetime                 |\
+|&nbsp;rank_id&nbsp;|&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;symbol&nbsp;|&nbsp;price&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;marketcap&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;datetime&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|\
 +---------+----------+--------+--------------------+--------------------+--------------------------+\
-|       1 | Bitcoin  | BTC    |  33616.63914384671 |  625829810216.7985 | 2021-02-02T01:56:02.000Z |\
-|       2 | Ethereum | ETH    | 1375.0092892043913 | 157435816086.15372 | 2021-02-02T01:56:02.000Z |\
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;|&nbsp;Bitcoin&nbsp;&nbsp;|&nbsp;BTC&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;33616.63914384671&nbsp;|&nbsp;&nbsp;625829810216.7985&nbsp;|&nbsp;2021-02-02T01:56:02.000Z&nbsp;|\
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;|&nbsp;Ethereum&nbsp;|&nbsp;ETH&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;1375.0092892043913&nbsp;|&nbsp;157435816086.15372&nbsp;|&nbsp;2021-02-02T01:56:02.000Z&nbsp;|\
 +---------+----------+--------+--------------------+--------------------+--------------------------+\
 
-Success! We did it!
+### Success! We did it!
 
 
