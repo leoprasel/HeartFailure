@@ -1,6 +1,6 @@
 # Machine Learning
 ---
-## [Project nº1: HeartFailure](https://github.com/leoprasel/Portfolio/blob/main/HeartFailure.ipynb)
+## [ML Project 1: HeartFailure](https://github.com/leoprasel/Portfolio/blob/main/HeartFailure.ipynb)
 ### Overview:
 Data analysis project using machine learning algorithms on a Kaggle database programmed in python. The database shows data from heart attack patients and their respective physical conditions.
 
