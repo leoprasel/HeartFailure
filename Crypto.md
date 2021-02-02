@@ -3,19 +3,30 @@
 #### After extracting it using it's API with python, we'll store the data in a MySQL database with the help of Docker. 
 
 #### Docker
-In order to create a mysql docker container, we use the following code on the linux command line:
+In order to create a mysql docker container, we use a docker container with the following configuration:
 
 ```
-docker container run -d -p 3306:3306 --name mysql -e MYSQL_RANDOM_ROOT_PASSWORD=yes mysql
+version: "3.3"
+
+services:
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    volumes:
+      - /home/leo/cryptoproject/database:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=crypto
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
 ```
 
-Searching the logs for the root password, we get the following key: inus6ciecae8chogahqu3No0iph5ohZo
-
-So now we should structure the SQL database.
+So now we should structure and create the SQL table.
 
 ```
- CREATE DATABASE cryptoproject;
- use cryṕtoproject;
+ docker exec -it cryptoproject_mysql_1
+ use cryṕto;
 ```
 ```
  CREATE TABLE IF NOT EXISTS `crypto` (
@@ -24,15 +35,33 @@ So now we should structure the SQL database.
   `symbol` varchar(10) NOT NULL,
   `price` float(50) NOT NULL,
   `marketcap` float(50) NOT NULL,
-  `datetime` DATETIME NOT NULL,
+  `datetime` varchar(50) NOT NULL,
   PRIMARY KEY (`rank_id`)
   );
 ```
+Now finally, we can get some data using an API with the help of python, and inserting this into the mySQL database server.
 
 ```
 from requests import Request, Session
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 import json
+import mysql.connector
+
+#SQL database configs
+config = {
+  'host': 'localhost',
+  'port': 3306,
+  'user': 'user',
+  'password': 'password',
+  'database': 'crypto'
+}
+
+cnx = mysql.connector.connect(**config)
+cursor = cnx.cursor()
+sql = "INSERT INTO crypto (name, symbol, price, marketcap, datetime) VALUES (%s,%s,%s,%s,%s)"
+
+
+#API data import
 url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
 parameters = {
   'start':'1',
@@ -46,18 +75,25 @@ headers = {
 
 session = Session()
 session.headers.update(headers)
-
-
 response = session.get(url, params=parameters)
 coins = json.loads(response.text)
-#print(json.dumps(data, indent=4, sort_keys=True))
-
-import mysql.connector
-def insertTable():
-    try:
-        connection = mysql.connector.connect(host='localhost')
-
 
 for coin in coins['data']:
     record = (coin['name'],coin['symbol'],coin['quote']['USD']['price'],coin['quote']['USD']['market_cap'],coin['last_updated'])
+    cursor.execute(sql,record)
+    cnx.commit()
+
+print(cursor.rowcount, 'records inserted.')
 ```
+
+mysql> SELECT * FROM crypto;
++---------+----------+--------+--------------------+--------------------+--------------------------+
+| rank_id | name     | symbol | price              | marketcap          | datetime                 |
++---------+----------+--------+--------------------+--------------------+--------------------------+
+|       1 | Bitcoin  | BTC    |  33616.63914384671 |  625829810216.7985 | 2021-02-02T01:56:02.000Z |
+|       2 | Ethereum | ETH    | 1375.0092892043913 | 157435816086.15372 | 2021-02-02T01:56:02.000Z |
++---------+----------+--------+--------------------+--------------------+--------------------------+
+
+Success! We did it!
+
+
